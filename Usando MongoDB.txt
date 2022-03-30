@@ -1,10 +1,10 @@
 //Cree una base de datos llamada 'my_first_db'.
 use my_first_db
 
-//Crear colección de estudiantes.
+//Crear colecciï¿½n de estudiantes.
 db.createCollection('students')
 
-//Crea 5 estudiantes con la información adecuada.
+//Crea 5 estudiantes con la informaciï¿½n adecuada.
 db.students.insert({name:'Vicente', home_state:'California',lucky_number:17, birthday: {month:9,day:15,year:1987}})
 db.students.insert({name:'Diego', home_state:'Washington',lucky_number:0, birthday: {month:1,day:15,year:1999}})
 db.students.insert({name:'Caro', home_state:'Santiago',lucky_number:5, birthday: {month:2,day:10,year:1980}})
@@ -17,20 +17,20 @@ db.students.find().pretty()
 //Recupera a todos los estudiantes que son de California (San Jose Dojo) o Washington (Seattle Dojo).
 db.students.find({$or:[{home_state:'California'},{home_state:'Washington'}]}).pretty()
 
-//Obten todos los estudiantes cuyo número de la suerte sea mayor que 3
+//Obten todos los estudiantes cuyo nï¿½mero de la suerte sea mayor que 3
 db.students.find({lucky_number: {$gt:3}}).pretty()
 
-//Obten todos los estudiantes cuyo número de la suerte sea menor o igual a 10
+//Obten todos los estudiantes cuyo nï¿½mero de la suerte sea menor o igual a 10
 db.students.find({lucky_number: {$lt:10}}).pretty()
 
-//Obten todos los estudiantes cuyo número de la suerte esté entre 1 y 9 (inclusive)
+//Obten todos los estudiantes cuyo nï¿½mero de la suerte estï¿½ entre 1 y 9 (inclusive)
 db.students.find({$and:[{lucky_number: {$gt:1}},{lucky_number: {$lte:9}}]}).pretty()
 
-//Agrega un campo a cada colección de estudiantes llamado 'intereses' que es un ARRAY. Debe contener las siguientes entradas: 'codificación', 'brunch', 'MongoDB'. Haz esto en UNA operación.
+//Agrega un campo a cada colecciï¿½n de estudiantes llamado 'intereses' que es un ARRAY. Debe contener las siguientes entradas: 'codificaciï¿½n', 'brunch', 'MongoDB'. Haz esto en UNA operaciï¿½n.
 db.students.update({}, {$set: {intereses: ['coding','brunch','MongoDB']}}, false, true)
 //db.students.update({},{$set:{intereses: ['coding','brunch','MongoDB']}) solo edita uno
 
-//Agrega algunos intereses únicos para cada estudiante en particular en cada una de sus matrices de intereses.
+//Agrega algunos intereses ï¿½nicos para cada estudiante en particular en cada una de sus matrices de intereses.
 db.students.update({name:'Vicente'},{$push:{intereses: 'basketball'}})
 db.students.update({name:'Diego'},{$push:{intereses: 'emprendimiento'}})
 db.students.update({name:'Caro'},{$push:{intereses: 'arte'}})
@@ -41,7 +41,7 @@ db.students.update({name:'Dorian'},{$push:{intereses: 'salud'}})
 db.students.update({name:'Vicente'},{$push:{intereses: 'impuestos'}})
 
 //Elimina los intereses de 'impuestos' que acaba de agregar.
-db.students.update({name:'Vicente'},{$push:{intereses: 'impuestos'}})
+db.students.update({name:'Vicente'},{$pull:{intereses: 'impuestos'}})
 
 //Eliminar a todos los estudiantes que son de California.
 db.students.remove({home_state:'California'})
@@ -49,10 +49,10 @@ db.students.remove({home_state:'California'})
 //Eliminar a un alumno por su nombre.
 db.students.remove({name:'Dorian'})
 
-//Retira a un estudiante cuyo número de la suerte sea mayor que 5 (SOLO UNO)
+//Retira a un estudiante cuyo nï¿½mero de la suerte sea mayor que 5 (SOLO UNO)
 db.students.remove({lucky_number:{$gt:5}},true)
 
-//Agrega un campo a cada colección de estudiantes llamado 'number_of_belts' y configúralo en 0.
+//Agrega un campo a cada colecciï¿½n de estudiantes llamado 'number_of_belts' y configï¿½ralo en 0.
 db.students.update({}, {$set: {number_of_belts:0}}, false, true)
 
 //Incrementa este campo en 1 para todos los estudiantes en Washington (Seattle Dojo).
